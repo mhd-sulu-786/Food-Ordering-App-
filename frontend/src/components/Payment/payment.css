@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+
+.containerr{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:25px;
+  min-height: 100vh;
+  
+}
+
+.containerr form{
+  padding:20px;
+  width:700px;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0,0,0,2);
+  border-radius: 1rem;
+}
+
+.containerr form .row{
+  display: flex;
+  flex-wrap: wrap;
+  gap:15px;
+}
+
+.containerr form .row .col{
+  flex:1 1 250px;
+}
+
+.containerr form .row .col .title{
+  font-size: 20px;
+  color:#333;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.containerr form .row .col .inputBox{
+  margin:15px 0;
+}
+
+.containerr form .row .col .inputBox .spanPayment{
+  margin-bottom: 10px;
+  display: block;
+  font-weight: 500;
+}
+
+.containerr form .row .col .inputBox input{
+  width: 100%;
+  border:1px solid #ccc;
+  padding:10px 15px;
+  font-size: 15px;
+  text-transform: none;
+  border-radius: 10px;
+}
+
+.containerr form .row .col .inputBox input:focus{
+  border:1px solid #000;
+
+}
+
+.containerr form .row .col .flex{
+  display: flex;
+  gap:15px;
+}
+
+.containerr form .row .col .flex .inputBox{
+  margin-top: 5px;
+
+}
+
+.containerr form .row .col .inputBox img{
+  height: 34px;
+  margin-top: 5px;
+  filter: drop-shadow(0 0 1px #000);
+}
+
+.containerr form .submit-btn{
+  width: 100%;
+  padding:12px;
+  font-size: 17px;
+  background: #fb2157;
+  color:#fff;
+  margin-top: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 1rem;
+}
+
+.containerr form .submit-btn:hover{
+  background: #fb2157;
+}
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite; /* Spin animation */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

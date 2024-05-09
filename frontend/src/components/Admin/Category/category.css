@@ -1,0 +1,28 @@
+.background{
+    display: flex;
+    align-items: center;
+    margin-left: 16%;
+    width: 84%;
+    color: black;
+    justify-content: center;
+    
+
+}
+.table{
+    margin-top: 8%;
+    width: 150vh;
+  
+}
+.table th tr td{
+    width: 100%;
+    justify-content: center;
+    text-transform: uppercase;
+}
+.table>tbody {
+    vertical-align: initial;
+}
+.categoryform{
+    margin-top: 15%;
+
+}
+

@@ -1,0 +1,118 @@
+.navbar {
+    /* background-color: #060b26; */
+    height: 50px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 23px;
+
+  }
+  
+  .menu-bars {
+    margin-left: 2rem;
+    font-size: 2rem;
+    background: none;
+
+  }
+  
+  .nav-menu {
+   background: white;
+    width: 270px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+   
+    top: 0;
+    left: -100%;
+    transition: 850ms;
+  }
+  
+  .nav-menu.active {
+    left: 0;
+    top: 10%;
+    height: 100%;
+    transition: 350ms;
+    
+    z-index: 1;
+    box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25); 
+}
+  
+  .nav-text {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 8px 0px 8px 16px;
+    list-style: none;
+    height: 93px;
+    color: #fb2157;
+  }
+  
+  .nav-text a {
+    text-decoration: none;
+    color: #f5f5f5;
+    font-size: 18px;
+    width: 95%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    border-radius: 4px;
+  }
+  
+  
+  
+  .nav-menu-items {
+    width: 150%;
+  }
+  
+  .navbar-toggle {
+
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: white;
+  
+  }
+
+
+/* Sidebar container */
+.nav-menu {
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  max-height: calc(100vh - 60px); /* Set maximum height */
+  background-color: #fff; /* Background color */
+  padding: 20px; /* Padding to provide space around content */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Individual menu items */
+.nav-menu-items {
+  list-style: none; /* Remove default list styles */
+  padding: 0;
+  margin: 0;
+  margin-top: 216%;
+}
+
+/* Menu item styles */
+.nav-menu-items li {
+  padding: 10px 0; /* Add padding between menu items */
+}
+
+/* Active menu item */
+.nav-menu-items li.active {
+  background-color: #f0f0f0; /* Background color for active menu item */
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #fb2157;
+  border-radius: 10px;
+}
