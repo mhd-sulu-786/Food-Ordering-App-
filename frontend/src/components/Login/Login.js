@@ -22,12 +22,9 @@ const Login = () => {
       const response = await axios.post('http://localhost:4000/login', user);
       setLoading(false);
 
-      const userData = {
-        name: response.data.name,
-        token: response.data.token,
-      };
+      
 
-      localStorage.setItem('currentUser', JSON.stringify(userData));
+      localStorage.setItem('currentUser', JSON.stringify(response.data));
       console.log('Login successful', response.data);
 
       // Check if the user is an admin

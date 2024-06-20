@@ -104,8 +104,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function Menu({ selectedCategory,addToCart }) {
     const [foods, setFoods] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [cartItems, setCartItems] = useState([]);
-   
+     const user = JSON.parse(localStorage.getItem('currentUser')) 
 
     useEffect(() => {
         axios.get("http://localhost:4000/getFood")
@@ -118,12 +117,12 @@ function Menu({ selectedCategory,addToCart }) {
             });
     }, []);
 
-  const handleAddToCart = async (food) => {
+  const handleAddToCart = async (food,foodname) => {
     try {
       console.log("Adding food to cart:", food);
-      const response = await axios.post('http://localhost:4000/addToCart', food);
+      const response = await axios.post(`http://localhost:4000/addToCart/${user._id}`,food);
       addToCart(food);
-      toast.success(`"${food.foodname}" added to cart!`);
+      toast.success(`"${foodname}" added to cart!`);
       console.log('Item added to cart:', response.data);
     } catch (error) {
       console.error('Error adding item to cart:', error);
@@ -174,7 +173,7 @@ function Menu({ selectedCategory,addToCart }) {
                   
                   
                   <button
-                 onClick={() => handleAddToCart(food)}
+                 onClick={() => handleAddToCart(food,food.foodname)}
                       style={{ color: 'white', background: '#fb2157', border: 'none', borderRadius: '1rem', padding: '4px 23px', textDecoration: 'none', marginLeft: '15px' }}>
                       Add
                        </button>

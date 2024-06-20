@@ -20,7 +20,8 @@ const orderModel = require ('../backend/models/order')
 const paymentModel =require('../backend/models/payment')
 const User = require('../backend/models/user')
 
-const Cart = require('../backend/models/order')
+const Cart = require('../backend/models/order');
+const userModel = require('../backend/models/user');
 
 
 const storage = multer.diskStorage({
@@ -125,12 +126,8 @@ app.get('/user/:id', async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const userData = {
-      name: user.name,
-      email: user.email
-    };
 
-    res.json(userData);
+    res.json(user);
   } catch (error) {
     console.error('Error fetching user data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -562,15 +559,45 @@ app.get('/api/selectedFood', (req, res) => {
   res.json(selectedFood);
 });
 ////////////////////////////////////////////////
-app.post('/addToCart', async (req, res) => {
+app.post('/addToCart/:id', async (req, res) => {
   try {
-      const { userId, foodname, image, category, description, price } = req.body;
-      const cartItem = new Cart({ userId, foodname, image, category, description, price });
-      await cartItem.save();
-      res.status(201).json({ message: 'Item added to cart successfully' });
+    const user = await userModel.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    user.userCollection.push(req.body);
+    console.log(req.body);
+      await user.save();
+    res.status(201).json({ message: 'Item added to cart successfully' });
   } catch (error) {
-      console.error('Error adding item to cart:', error);
-      res.status(500).json({ message: 'Failed to add item to cart' });
+    console.error('Error adding item to cart:', error);
+    res.status(500).json({ message: 'Failed to add item to cart' });
+  }
+});
+
+app.delete('/removeFromCart/:id/:itemId', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const itemId = req.params.itemId;
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const itemIndex = user.userCollection.findIndex(item => item._id == itemId);
+    if (itemIndex === -1) {
+      return res.status(404).json({ message: 'Item not found in cart' });
+    }
+
+    user.userCollection.splice(itemIndex, 1);
+    await user.save();
+
+    res.status(200).json({ message: 'Item removed from cart successfully' });
+  } catch (error) {
+    console.error('Error removing item from cart:', error);
+    res.status(500).json({ message: 'Failed to remove item from cart' });
   }
 });
 

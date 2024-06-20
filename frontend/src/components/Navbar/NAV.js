@@ -171,16 +171,22 @@ function NAV({ userId, cartItems })  {
   const [isNavOpen, setIsNavOpen] = useState(false); // State to manage Navbar collapse
   const state = useSelector((state) => state.handleCart);
   const { id } = useParams();
+const [collections,setcollection]=useState(0)
   const navigate = useNavigate()
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/user/${id}`);
         const userData = response.data;
+        console.log(userData);
+        setcollection( userData.userCollection.length);
+        console.log(collections);
+        
         setFormData(prevState => ({
           ...prevState,
           email: userData.email,
-          name: userData.name
+          name: userData.name,
+         
         }));
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -193,7 +199,8 @@ function NAV({ userId, cartItems })  {
 
   const [formData, setFormData] = useState({
     name: '',
-    email: ''
+    email: '',
+  
   });
 
 
@@ -269,7 +276,7 @@ function NAV({ userId, cartItems })  {
             <li className="nav-item">
               <Link className="nav-link" to={`/cart/${id}`}>
                 <button className="btn">
-                <i className="fa-solid fa-cart-shopping me-1"></i> Cart({cartItems ? cartItems.length : 0})
+                <i className="fa-solid fa-cart-shopping me-1"></i> Cart({collections  ? collections : 0})
                 </button>
               </Link>
             </li>

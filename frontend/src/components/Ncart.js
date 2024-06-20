@@ -352,18 +352,18 @@ import Footer from './Frontpage/Footer';
 function Ncart() {
   const [cartItems, setCartItems] = useState([]);
   const { id } = useParams();
-
+  const url =`http://localhost:4000/user/${id}`;
   useEffect(() => {
     // Fetch cart data for the logged-in user
-    axios.get('http://localhost:4000/cartData')
+    axios.get(url)
       .then((res) => {
         console.log("Cart data received:", res.data);
-        setCartItems(res.data);
+        setCartItems(res.data.userCollection);
       })
       .catch((err) => {
         console.log("Error fetching cart data:", err);
       });
-  }, []);
+  }, id);
 
   const [deliveryCharge, setDeliveryCharge] = useState(0);
 
@@ -381,15 +381,17 @@ function Ncart() {
   // Function to handle deleting a cart item
   const handleDelete = async (itemId) => {
     try {
-      await axios.delete(`http://localhost:4000/deleteCartItem/${itemId}`);
-      // Filter out the deleted item from the cart items state
-      setCartItems(cartItems.filter(item => item._id !== itemId));
+      await axios.delete(`http://localhost:4000/removeFromCart/${id}/${itemId}`); // Corrected API endpoint
+  
       toast.success('Item deleted successfully');
+      // Update the cartItems state after deletion
+      setCartItems(cartItems.filter(item => item._id !== itemId));
     } catch (error) {
-      console.error('Error deleting item:', error);
+      console.error('Error deleting item:', error); // Log the actual error message
       toast.error('Failed to delete item');
     }
   };
+  
 
   return (
     <div>

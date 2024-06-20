@@ -182,13 +182,13 @@ function Frontpage() {
  
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [cartItems, setCartItems] = useState([]);
-
+  const user = JSON.parse(localStorage.getItem('currentUser')) 
   useEffect(() => {
     // Fetch cart data for the logged-in user
-    axios.get('http://localhost:4000/cartData')
+     axios.get(`http://localhost:4000/user/${user._id}`)
       .then((res) => {
         console.log("Cart data received:", res.data);
-        setCartItems(res.data);
+        setCartItems(res.data.userCollection);
       })
       .catch((err) => {
         console.log("Error fetching cart data:", err);
